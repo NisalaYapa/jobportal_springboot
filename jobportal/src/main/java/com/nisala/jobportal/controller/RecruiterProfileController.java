@@ -1,11 +1,12 @@
 package com.nisala.jobportal.controller;
 
+
 import com.nisala.jobportal.entity.RecruiterProfile;
 import com.nisala.jobportal.entity.Users;
 import com.nisala.jobportal.repository.UsersRepository;
+
 import com.nisala.jobportal.services.RecruiterProfileService;
-import com.nisala.jobportal.util.FileUploadUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.nisala.jobportal.util.FileUploadUtil;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,34 +52,39 @@ public class RecruiterProfileController {
 
         return "recruiter_profile";
     }
-    @PostMapping("/addNew")
-    public String addNew(RecruiterProfile recruiterProfile, @RequestParam("image") MultipartFile multipartFile, Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (!(authentication instanceof AnonymousAuthenticationToken)){
+    @PostMapping("/addNew")
+    public String addNew(RecruiterProfile recruiterProfile, @RequestParam("image") MultipartFile multipartFile, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
-            Users users  =  usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("Could not find user"));
+            Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("Could not " + "found user"));
             recruiterProfile.setUserId(users);
             recruiterProfile.setUserAccountId(users.getUserId());
-
-
         }
-        model.addAttribute("profile" , recruiterProfile);
+        model.addAttribute("profile", recruiterProfile);
         String fileName = "";
-        if (!multipartFile.getOriginalFilename().equals("")){
+        if (!multipartFile.getOriginalFilename().equals("")) {
             fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
             recruiterProfile.setProfilePhoto(fileName);
         }
-        RecruiterProfile savedUser = recruiterProfileService.addnew(recruiterProfile);
+        RecruiterProfile savedUser = recruiterProfileService.addNew(recruiterProfile);
 
         String uploadDir = "photos/recruiter/" + savedUser.getUserAccountId();
-        try{
-            FileUploadUtils.saveFile(uploadDir, fileName, multipartFile);
-        }catch(Exception ex){
+        try {
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
         return "redirect:/dashboard/";
     }
-
 }
+
+
+
+
+
+
+

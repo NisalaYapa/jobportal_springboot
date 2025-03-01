@@ -1,14 +1,16 @@
 package com.nisala.jobportal.controller;
 
+
 import com.nisala.jobportal.entity.Users;
 import com.nisala.jobportal.entity.UsersType;
+
 import com.nisala.jobportal.services.UsersService;
 import com.nisala.jobportal.services.UsersTypeService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -42,7 +44,7 @@ public class UsersController {
 
     @PostMapping("/register/new")
     public String userRegistration(@Valid Users users, Model model) {
-        Optional<Users> optionalUsers = usersService.getUsersByEmail(users.getEmail());
+        Optional<Users> optionalUsers = usersService.getUserByEmail(users.getEmail());
         if (optionalUsers.isPresent()) {
             model.addAttribute("error", "Email already registered,try to login or register with other email.");
             List<UsersType> usersTypes = usersTypeService.getAll();

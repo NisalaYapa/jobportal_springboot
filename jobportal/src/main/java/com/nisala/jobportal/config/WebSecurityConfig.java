@@ -1,5 +1,6 @@
 package com.nisala.jobportal.config;
 
+
 import com.nisala.jobportal.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,18 +13,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.swing.*;
+
 @Configuration
 public class WebSecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
-
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+        this.customUserDetailsService = customUserDetailsService;
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+    }
 
-
-
-    private final String[] publicUrl = {
-            "/",
-            "global-search/**",
+    private final String[] publicUrl = {"/",
+            "/global-search/**",
             "/register",
             "/register/**",
             "/webjars/**",
@@ -35,39 +39,31 @@ public class WebSecurityConfig {
             "/*.css",
             "/*.js",
             "/*.js.map",
-            "/fonts**",
-            "/favicon.ico",
-            "/resources/**",
-            "/error"
-    };
-
-    @Autowired
-    public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
-        this.customUserDetailsService = customUserDetailsService;
-        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-    }
+            "/fonts**", "/favicon.ico", "/resources/**", "/error"};
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.authenticationProvider(authenticationProvider());
+
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(publicUrl).permitAll();
             auth.anyRequest().authenticated();
         });
 
-        http.formLogin(form ->  form.loginPage("/login").permitAll()
+        http.formLogin(form->form.loginPage("/login").permitAll()
                 .successHandler(customAuthenticationSuccessHandler))
-                .logout(logout -> {
+                .logout(logout-> {
                     logout.logoutUrl("/logout");
                     logout.logoutSuccessUrl("/");
                 }).cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable());
+                .csrf(csrf->csrf.disable());
+
         return http.build();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-
 
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());

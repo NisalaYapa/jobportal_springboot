@@ -1,5 +1,6 @@
 package com.nisala.jobportal.services;
 
+
 import com.nisala.jobportal.entity.RecruiterProfile;
 import com.nisala.jobportal.repository.RecruiterProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +11,18 @@ import java.util.Optional;
 @Service
 public class RecruiterProfileService {
 
-    private final RecruiterProfileRepository recruiterProfileRepository;
-
+    private final RecruiterProfileRepository recruiterRepository;
 
     @Autowired
-    public RecruiterProfileService(RecruiterProfileRepository recruiterProfileRepository) {
-        this.recruiterProfileRepository = recruiterProfileRepository;
+    public RecruiterProfileService(RecruiterProfileRepository recruiterRepository) {
+        this.recruiterRepository = recruiterRepository;
     }
 
-    public Optional<RecruiterProfile> getOne(Integer id){
-        return recruiterProfileRepository.findById(id);
+    public Optional<RecruiterProfile> getOne(Integer id) {
+        return recruiterRepository.findById(id);
     }
 
-    public RecruiterProfile addnew(RecruiterProfile recruiterProfile) {
-        return recruiterProfileRepository.save(recruiterProfile);
+    public RecruiterProfile addNew(RecruiterProfile recruiterProfile) {
+        return recruiterRepository.save(recruiterProfile);
     }
 }
