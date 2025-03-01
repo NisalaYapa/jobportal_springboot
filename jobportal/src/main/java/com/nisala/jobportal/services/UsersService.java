@@ -43,15 +43,15 @@ public class UsersService {
 
         int userTypeId = users.getUserTypeId().getUserTypeId();
 
-        System.out.println(userTypeId);
+        System.out.println(users);
 
         if(userTypeId == 1){
-            recruiterProfileRepository.save(new RecruiterProfile(savedUser));
+            recruiterProfileRepository.save(new RecruiterProfile(savedUser));  //Insert to the recruiters table
 
         }
 
         else{
-            jobSeekerProfileRepository.save(new JobSeekerProfile(savedUser));
+            jobSeekerProfileRepository.save(new JobSeekerProfile(savedUser));   //Insert to the jobseekers table
         }
 
 
@@ -84,4 +84,6 @@ public class UsersService {
 
         return null;
     }
+
+
 }
