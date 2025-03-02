@@ -1,9 +1,7 @@
 package com.nisala.jobportal.controller;
 
-
 import com.nisala.jobportal.entity.Users;
 import com.nisala.jobportal.entity.UsersType;
-
 import com.nisala.jobportal.services.UsersService;
 import com.nisala.jobportal.services.UsersTypeService;
 import jakarta.servlet.http.HttpServletRequest;

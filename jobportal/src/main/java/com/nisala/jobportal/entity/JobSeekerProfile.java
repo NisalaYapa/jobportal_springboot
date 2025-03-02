@@ -1,9 +1,6 @@
 package com.nisala.jobportal.entity;
 
-import com.nisala.jobportal.entity.Skills;
-import com.nisala.jobportal.entity.Users;
 import jakarta.persistence.*;
-
 
 import java.util.List;
 
@@ -155,7 +152,7 @@ public class JobSeekerProfile {
     @Transient
     public String getPhotosImagePath() {
         if (profilePhoto == null || userAccountId == null) return null;
-        return "/photos/candidate/" + userAccountId + "/" + profilePhoto;
+        return "photos/candidate/" + userAccountId + "/" + profilePhoto;
     }
 
     @Override

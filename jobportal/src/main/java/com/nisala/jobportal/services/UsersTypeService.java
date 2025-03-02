@@ -2,8 +2,6 @@ package com.nisala.jobportal.services;
 
 import com.nisala.jobportal.entity.UsersType;
 import com.nisala.jobportal.repository.UsersTypeRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +11,11 @@ public class UsersTypeService {
 
     private final UsersTypeRepository usersTypeRepository;
 
-    @Autowired
-    public UsersTypeService(UsersTypeRepository usersTypeRepository){
+    public UsersTypeService(UsersTypeRepository usersTypeRepository) {
         this.usersTypeRepository = usersTypeRepository;
     }
 
-    public List<UsersType> getAll(){
+    public List<UsersType> getAll() {
         return usersTypeRepository.findAll();
     }
 }

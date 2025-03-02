@@ -1,6 +1,5 @@
 package com.nisala.jobportal.config;
 
-
 import com.nisala.jobportal.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

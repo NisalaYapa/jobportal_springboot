@@ -10,18 +10,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 public class CustomUserDetails implements UserDetails {
-    private final Users user;
+
+    private Users user;
 
     public CustomUserDetails(Users user) {
         this.user = user;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         UsersType usersType = user.getUserTypeId();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(usersType.getUserTypeName()));

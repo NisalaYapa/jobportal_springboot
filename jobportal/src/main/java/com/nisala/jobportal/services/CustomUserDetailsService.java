@@ -1,6 +1,5 @@
 package com.nisala.jobportal.services;
 
-
 import com.nisala.jobportal.entity.Users;
 import com.nisala.jobportal.repository.UsersRepository;
 import com.nisala.jobportal.util.CustomUserDetails;

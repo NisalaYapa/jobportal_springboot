@@ -1,10 +1,8 @@
 package com.nisala.jobportal.controller;
 
-
 import com.nisala.jobportal.entity.RecruiterProfile;
 import com.nisala.jobportal.entity.Users;
 import com.nisala.jobportal.repository.UsersRepository;
-
 import com.nisala.jobportal.services.RecruiterProfileService;
 import com.nisala.jobportal.util.FileUploadUtil;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -81,6 +79,7 @@ public class RecruiterProfileController {
         return "redirect:/dashboard/";
     }
 }
+
 
 
 

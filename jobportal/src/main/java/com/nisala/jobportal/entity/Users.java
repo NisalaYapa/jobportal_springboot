@@ -45,44 +45,44 @@ public class Users {
         return userId;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public UsersType getUserTypeId() {
-        return userTypeId;
-    }
-
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
     public void setActive(boolean active) {
         isActive = active;
     }
 
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public UsersType getUserTypeId() {
+        return userTypeId;
     }
 
     public void setUserTypeId(UsersType userTypeId) {
