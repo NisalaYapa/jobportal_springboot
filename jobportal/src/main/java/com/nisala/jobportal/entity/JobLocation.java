@@ -10,29 +10,28 @@ public class JobLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     private String city;
     private String state;
     private String country;
 
     public JobLocation() {
-
     }
 
-    public JobLocation(String country, String state, String city, Integer id) {
-        this.country = country;
-        this.state = state;
+    public JobLocation(Integer id, String city, String state, String country) {
+        this.id = id;
         this.city = city;
-        Id = id;
+        this.state = state;
+        this.country = country;
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getCity() {
@@ -62,7 +61,7 @@ public class JobLocation {
     @Override
     public String toString() {
         return "JobLocation{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
